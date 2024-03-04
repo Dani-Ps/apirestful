@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.api.productos.entities.Usuario;
 
 @Repository("I_UsuarioRepository")
-public interface I_UsuarioRepository extends JpaRepository<Usuario, Serializable>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Serializable>{
 
 	public abstract Usuario findById(int id);
 

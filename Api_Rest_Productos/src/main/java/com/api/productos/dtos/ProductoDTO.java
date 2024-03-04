@@ -1,48 +1,48 @@
-package com.api.productos.entities;
+package com.api.productos.dtos;
 
-import java.io.Serializable;
+import com.api.productos.entities.Producto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class ProductoDTO {
 
-@Table(name = "productos")
-@Entity
-public class Producto implements Serializable {
-
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "id")
 	private int id;
 
-	@Column(name = "codigo")
 	private String codigo;
 
-	@Column(name = "nombre")
 	private String nombre;
 
-	@Column(name = "precio")
 	private float precio;
 
-	public Producto() {
+	public ProductoDTO() {
 	}
 
-	public Producto(String codigo, String nombre, float precio) {
+	public ProductoDTO(String codigo, String nombre, float precio) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.precio = precio;
 	}
 
-	public Producto(int id, String codigo, String nombre, float precio) {
+	public ProductoDTO(int id, String codigo, String nombre, float precio) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.precio = precio;
+	}
+
+	/*
+	 * @version 1.0
+	 * 
+	 * Instancia de la clase-entidad Producto
+	 * 
+	 * @param producto
+	 */
+	public ProductoDTO(Producto producto) {
+		this.id = producto.getId();
+		this.nombre = producto.getNombre();
+		this.codigo = producto.getCodigo();
+		this.precio = producto.getPrecio();
+
 	}
 
 	public int getId() {

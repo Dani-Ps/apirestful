@@ -1,4 +1,4 @@
-package com.api.productos.service;
+package com.api.productos.service.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.api.productos.entities.Usuario;
-import com.api.productos.repositories.interfaces.I_UsuarioRepository;
+import com.api.productos.repositories.interfaces.UsuarioRepository;
 
 @Service("UsuarioService")
-public class UsuarioService implements UserDetailsService {
+public class UsuarioServicImpl implements UserDetailsService {
 
 	@Autowired
 	@Qualifier("I_UsuarioRepository")
-	private I_UsuarioRepository iUsuarioRepository;
+	private UsuarioRepository iUsuarioRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

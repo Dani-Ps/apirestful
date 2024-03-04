@@ -16,77 +16,66 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.productos.dtos.ProductoDTO;
 import com.api.productos.entities.Producto;
-import com.api.productos.model.ProductoModel;
-import com.api.productos.service.ProductoService;
+import com.api.productos.service.implementation.ProductoServiceImpl;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/v1/producto")
 public class ProductoController {
 
-	
-	@Autowired
-	@Qualifier("ProductoService")
-	ProductoService productoService;
+    @Autowired
+    @Qualifier("ProductoService")
+    ProductoServiceImpl productoService;
 
+    // METODO POST
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PostMapping("/")
+    public boolean agregarProducto(@RequestBody @Validated Producto producto) {
+        return productoService.agregarProducto(producto);
+    }
 
-	// METODO POST
-	@PreAuthorize("hasRole('ADMINISTRADOR')")
-	@PostMapping("/producto")
-	public boolean agregarProducto(@RequestBody @Validated Producto producto) {
-		return productoService.agregarProducto(producto);
-	}
+    // MÉTODO PUT
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @PutMapping("/")
+    public boolean editarProducto(@RequestBody @Validated Producto producto) {
+        return productoService.editarProducto(producto);
+    }
 
-	// MÉTODO PUT
-	@PreAuthorize("hasRole('ADMINISTRADOR')")
-	@PutMapping("/producto")
-	public boolean editarProducto(@RequestBody @Validated Producto producto) {
-		return productoService.editarProducto(producto);
+    // MÉTODO DELETE
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
+    @DeleteMapping("/{id}")
+    public boolean eliminarProducto(@PathVariable("id") int id) {
+        return productoService.eliminarProducto(id);
+    }
 
-	}
+    // MÉTODO GET
+    @GetMapping("/")
+    public List<ProductoDTO> listadoProductos(Pageable pageable) {
+        return productoService.listadoProductos(pageable);
+    }
 
-	// MÉTODO DELETE
-	@PreAuthorize("hasRole('ADMINISTRADOR')")
-	@DeleteMapping("/producto/{id}")
-	public boolean eliminarProducto(@PathVariable("id") int id) {
-		return productoService.eliminarProducto(id);
+    // ---GET---
+    @GetMapping("/id/{id}")
+    public ProductoDTO getById(@PathVariable("id") int id) {
+        return productoService.findById(id);
+    }
 
-	}
+    // ---GET---
+    @GetMapping("/codigo/{codigo}")
+    public List<ProductoDTO> getByCodigo(@PathVariable("codigo") String codigo) {
+        return productoService.findByCodigo(codigo);
+    }
 
-	// MÉTODO GET
-	@GetMapping("/productos")
-	public List<ProductoModel> listadoProductos(Pageable pageable) {
-		return productoService.listadoProductos(pageable);
-	}
+    // ---GET---
+    @GetMapping("/nombre/{nombre}")
+    public List<ProductoDTO> getByNombre(@PathVariable("nombre") String nombre) {
+        return productoService.findByNombre(nombre);
+    }
 
-
-	// ---GET---
-	@GetMapping("/productos/id/{id}")
-	public ProductoModel getById(@PathVariable("id") int id) {
-
-		return productoService.findById(id);
-	}
-
-	// ---GET---
-	@GetMapping("/productos/codigo/{codigo}")
-	public List<ProductoModel> getByCodigo(@PathVariable("codigo") String codigo) {
-
-		return productoService.findByCodigo(codigo);
-	}
-
-	// ---GET---
-	@GetMapping("/productos/nombre/{nombre}")
-	public List<ProductoModel> getByNombre(@PathVariable("nombre") String nombre) {
-
-		return productoService.findByNombre(nombre);
-	}
-
-	// ---GET---
-	@GetMapping("/productos/precio/{precio}")
-	public List<ProductoModel> getByPrecio(@PathVariable("precio") float precio) {
-
-		return productoService.findByPrecio(precio);
-	}
-
-	
+    // ---GET---
+    @GetMapping("/precio/{precio}")
+    public List<ProductoDTO> getByPrecio(@PathVariable("precio") float precio) {
+        return productoService.findByPrecio(precio);
+    }
 }

@@ -1,4 +1,4 @@
-package com.api.productos.service;
+package com.api.productos.service.implementation;
 
 import java.util.List;
 
@@ -9,25 +9,27 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.api.productos.converters.ProductoConverter;
+import com.api.productos.dtos.ProductoDTO;
 import com.api.productos.entities.Producto;
-import com.api.productos.model.ProductoModel;
-import com.api.productos.repositories.interfaces.I_ProductoRepository;
+import com.api.productos.repositories.interfaces.ProductoRepository;
+import com.api.productos.service.interfaces.ProductServiceI;
 
 @Service("ProductoService")
-public class ProductoService {
+public class ProductoServiceImpl implements ProductServiceI{
 
 	@Autowired
 	@Qualifier("I_ProductoRepository")
-	private I_ProductoRepository iProductoRepository;
+	private ProductoRepository iProductoRepository;
 
 	@Autowired
 	@Qualifier("ProductoConverter")
 	private ProductoConverter productoConvertidor;
 
 	// LOGS DE ERROR
-	private static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(ProductoService.class);
+	private static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(ProductoServiceImpl.class);
 
 	// INSERT
+    @Override
 	public boolean agregarProducto(Producto producto) {
 
 		try {
@@ -50,6 +52,7 @@ public class ProductoService {
 	}
 
 	// UPDATE
+    @Override
 	public boolean editarProducto(Producto producto) {
 
 		try {
@@ -74,6 +77,7 @@ public class ProductoService {
 	}
 
 	// DELETE
+    @Override
 	public boolean eliminarProducto(int id) {
 
 		try {
@@ -100,34 +104,39 @@ public class ProductoService {
 	}
 
 	// LISTA DE PRODUCTOS
-	public List<ProductoModel> listadoProductos(Pageable pageable) {
+    @Override
+	public List<ProductoDTO> listadoProductos(Pageable pageable) {
 
 		return productoConvertidor.convertirListaProducto(iProductoRepository.findAll(pageable).getContent());
 
 	}
 
 	// PRODUCTO POR ID | VALOR UNICO
-	public ProductoModel findById(int id) {
+    @Override
+	public ProductoDTO findById(int id) {
 
-		return new ProductoModel(iProductoRepository.findById(id));
+		return new ProductoDTO(iProductoRepository.findById(id));
 
 	}
 
 	// PRODUCTO POR CODIGO
-	public List<ProductoModel> findByCodigo(String codigo) {
+    @Override
+	public List<ProductoDTO> findByCodigo(String codigo) {
 
 		return productoConvertidor.convertirListaProducto(iProductoRepository.findByCodigo(codigo));
 	}
 
 	// LISTA DE PRODUCTOS POR NOMBRE
-	public List<ProductoModel> findByNombre(String nombre) {
+    @Override
+	public List<ProductoDTO> findByNombre(String nombre) {
 
 		return productoConvertidor.convertirListaProducto(iProductoRepository.findByNombre(nombre));
 
 	}
 
 	// LISTA DE PRODUCTOS POR PRECIO
-	public List<ProductoModel> findByPrecio(float precio) {
+    @Override
+	public List<ProductoDTO> findByPrecio(float precio) {
 
 		return productoConvertidor.convertirListaProducto(iProductoRepository.findByPrecio(precio));
 

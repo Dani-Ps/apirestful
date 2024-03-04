@@ -13,7 +13,7 @@ import com.api.productos.entities.Producto;
 
 
 @Repository("I_ProductoRepository")
-public interface I_ProductoRepository extends JpaRepository<Producto, Serializable>, PagingAndSortingRepository<Producto, Serializable>{
+public interface ProductoRepository extends JpaRepository<Producto, Serializable>, PagingAndSortingRepository<Producto, Serializable>{
 
 public abstract Producto findById(int id);
 

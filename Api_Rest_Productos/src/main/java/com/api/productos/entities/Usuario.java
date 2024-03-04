@@ -9,32 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="usuarios")
-public class Usuario implements Serializable{
-	
+@Table(name = "usuarios")
+public class Usuario implements Serializable {
+
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@Column(name="id" , unique= true)
+	@Column(name = "id", unique = true)
 	private int id;
 
-	@Column(name="usuario" , unique= true)
+	@Column(name = "usuario", unique = true)
 	private String usuario;
-	
-	
-	@Column(name="contrasenia")
+
+	@Column(name = "contrasenia")
 	private String contrasenia;
 
-	@Column(name="rol")
+	@Column(name = "rol")
 	private byte rol;
 
-	@Column(name="estado")
+	@Column(name = "estado")
 	private boolean estado;
-	
-	
-	
-	
 
 	public int getId() {
 		return id;
@@ -81,9 +75,5 @@ public class Usuario implements Serializable{
 		return "Usuario [id=" + id + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", rol=" + rol
 				+ ", estado=" + estado + "]";
 	}
-	
-	
-	
-	
 
 }
