@@ -1,5 +1,6 @@
 package com.api.productos.service.implementation;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,9 +22,13 @@ import lombok.Builder;
 @Builder
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private final PasswordEncoder passwordEncoder;
+	@Autowired
 	private final JwtService jwtService;
+	@Autowired
 	private final AuthenticationManager authenticationManager;
 
 	public AuthenticationServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder,

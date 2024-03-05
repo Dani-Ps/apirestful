@@ -18,7 +18,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
 	public abstract List<Producto> findByNombre(String nombre);
 
-	public abstract List<Producto> findByPrecio(float precio);
+	public abstract List<Producto> findByPrecio(Double precio);
 
 	public abstract Page<Producto> findAll(Pageable pageable);
 

@@ -21,6 +21,7 @@ import com.github.javafaker.Faker;
 @Component
 public class InitializationData implements CommandLineRunner {
 
+	@Autowired
 	private UserRepository usuarioRepository;
 
 	static final boolean BORRAR_PRODUCTO = true;
@@ -28,6 +29,7 @@ public class InitializationData implements CommandLineRunner {
 	@Autowired
 	private ProductoRepository productoRepository;
 
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	private static final Logger logger = LoggerFactory.getLogger(InitializationData.class);
@@ -48,7 +50,6 @@ public class InitializationData implements CommandLineRunner {
 			usuario1.setPassword(passwordEncoder.encode("password123"));
 			usuario1.getRoles().add(Role.ROLE_USER);
 			usuarioRepository.save(usuario1);
-
 			// Usuario 2 - Rol ADMIN
 			Usuario usuario2 = new Usuario();
 			usuario2.setFirstName("Bob");
@@ -57,7 +58,6 @@ public class InitializationData implements CommandLineRunner {
 			usuario2.setPassword(passwordEncoder.encode("password456"));
 			usuario2.getRoles().add(Role.ROLE_ADMIN);
 			usuarioRepository.save(usuario2);
-
 			// Usuario 3 - Rol USER
 			Usuario usuario3 = new Usuario();
 			usuario3.setFirstName("Carol");
@@ -72,6 +72,7 @@ public class InitializationData implements CommandLineRunner {
 
 			logger.info(error);
 		}
+
 		Faker faker = new Faker(new Locale("es"));
 		for (int i = 0; i < 10; i++) {
 			Producto producto = new Producto();

@@ -2,6 +2,7 @@ package com.api.productos.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +30,7 @@ public class ProductoController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 
 	@Qualifier("productoService")
+	@Autowired
 	ProductoServiceImpl productoService;
 
 	// METODO POST
@@ -50,7 +52,7 @@ public class ProductoController {
 
 	// CRUD endpoints, accesibles solo por ROLE_ADMIN
 	// Crear un nuevo producto
-	@PostMapping
+	@PostMapping("/add")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public Producto createProduct(@RequestBody Producto producto) {
 		return productoService.agregarProducto(producto);

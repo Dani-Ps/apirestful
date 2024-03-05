@@ -3,6 +3,7 @@ package com.api.productos.config;
 import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -24,7 +25,9 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+	@Autowired
 	private JwtService jwtService;
+	@Autowired
 	private UserService userService;
 
 	@Override
