@@ -2,54 +2,51 @@ package com.api.productos.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
-@Table(name = "productos")
 @Entity
+@Table(name = "productos")
 public class Producto implements Serializable {
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "id")
-	private int id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	@Column(name = "codigo")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(unique = true)
+	@NotBlank(message = "El código no puede estar vacío")
+	@Size(min = 10, max = 13, message = "El código debe tener entre 10 y 13 caracteres")
+	@Pattern(regexp = "[\\d]+", message = "El código solo debe contener números")
 	private String codigo;
 
 	@Column(name = "nombre")
+	@NotBlank(message = "El nombres no puede estar vacío")
 	private String nombre;
 
 	@Column(name = "precio")
-	private float precio;
+	@NotBlank(message = "El precio no puede estar vacío")
+	private Double precio;
 
 	public Producto() {
 	}
 
-	public Producto(String codigo, String nombre, float precio) {
-		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.precio = precio;
-	}
-
-	public Producto(int id, String codigo, String nombre, float precio) {
-		super();
-		this.id = id;
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.precio = precio;
-	}
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -69,17 +66,12 @@ public class Producto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public float getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(float precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
-	}
-
-	@Override
-	public String toString() {
-		return "Producto [id=" + id + ", codigo=" + codigo + ", nombre=" + nombre + ", precio=" + precio + "]";
 	}
 
 }

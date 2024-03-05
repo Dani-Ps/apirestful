@@ -1,79 +1,122 @@
 package com.api.productos.entities;
 
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.transaction.Transactional;
 
 @Entity
-@Table(name = "usuarios")
-public class Usuario implements Serializable {
-
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Usuario implements UserDetails {
+	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "id", unique = true)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String firstName;
+	private String lastName;
+	@Column(unique = true)
+	private String email;
+	private String password;
 
-	@Column(name = "usuario", unique = true)
-	private String usuario;
+	@ElementCollection(fetch = FetchType.EAGER, targetClass = Role.class)
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name = "usuario_rol")
+	@Column(name = "RolesUsuario")
+	private Set<Role> roles = new HashSet<>();
 
-	@Column(name = "contrasenia")
-	private String contrasenia;
+	@Transactional
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (roles.isEmpty()) {
+			return null;
+		} else {
 
-	@Column(name = "rol")
-	private byte rol;
-
-	@Column(name = "estado")
-	private boolean estado;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
-	}
-
-	public String getContrasenia() {
-		return contrasenia;
-	}
-
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
-
-	public byte getRol() {
-		return rol;
-	}
-
-	public void setRol(byte rol) {
-		this.rol = rol;
-	}
-
-	public boolean getEstado() {
-		return estado;
-	}
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
+			return roles.stream().map(role -> new SimpleGrantedAuthority(role.name())).toList();
+		}
 	}
 
 	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", rol=" + rol
-				+ ", estado=" + estado + "]";
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 }
