@@ -21,12 +21,11 @@ import lombok.Builder;
 @Builder
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-	private UserRepository userRepository; // Asegúrate de que UserRepository esté inyectado correctamente
+	private UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
 
-	// Constructor para inyección de dependencias (si usas Spring)
 	public AuthenticationServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder,
 			JwtService jwtService, AuthenticationManager authenticationManager) {
 		this.userRepository = userRepository;
@@ -56,7 +55,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public JwtAuthenticationResponse signin(SigninRequest request) {
-		// Maneja la autenticación
 		Authentication authentication = authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 
