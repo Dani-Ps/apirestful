@@ -43,6 +43,7 @@ public class SecurityConfiguration {
 				.requestMatchers(HttpMethod.POST, PRODUCTOS_API_PATH + "**").hasAuthority(Role.ROLE_ADMIN.toString())
 				.requestMatchers(HttpMethod.PUT, PRODUCTOS_API_PATH + "**").hasAuthority(Role.ROLE_ADMIN.toString())
 				.requestMatchers(HttpMethod.DELETE, PRODUCTOS_API_PATH + "**").hasAuthority(Role.ROLE_ADMIN.toString())
+				.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 				.requestMatchers("/api/v1/users/**").hasAuthority("ROLE_ADMIN").anyRequest().authenticated())
 				.sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
 				.authenticationProvider(authenticationProvider())
