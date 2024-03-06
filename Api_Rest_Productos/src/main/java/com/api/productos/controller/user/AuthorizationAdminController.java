@@ -21,6 +21,10 @@ public class AuthorizationAdminController {
 
 	private UserService userService;
 
+	public AuthorizationAdminController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@GetMapping
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public ResponseEntity<List<UsuarioResponse>> showUsers() {

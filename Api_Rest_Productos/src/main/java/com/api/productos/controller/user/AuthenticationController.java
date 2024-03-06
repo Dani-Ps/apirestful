@@ -1,6 +1,5 @@
 package com.api.productos.controller.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,14 +11,15 @@ import com.api.productos.dto.request.SigninRequest;
 import com.api.productos.dto.response.user.JwtAuthenticationResponse;
 import com.api.productos.service.interfaces.AuthenticationService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/api/v1/auth")
-@RequiredArgsConstructor
 public class AuthenticationController {
-	@Autowired
-	AuthenticationService authenticationService;
+
+	private final AuthenticationService authenticationService;
+
+	public AuthenticationController(AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
+	}
 
 	@PostMapping("/signup")
 	public ResponseEntity<JwtAuthenticationResponse> signup(@RequestBody SignUpRequest request) {
