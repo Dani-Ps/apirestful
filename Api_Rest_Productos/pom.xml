@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.api.productos</groupId>
-	<artifactId>Api_Rest_Productos</artifactId>
+	<artifactId>ApiRestProductos</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Api_Rest_Productos</name>
 	<description>Api Rest con Productos hecha con SpringBoot</description>
