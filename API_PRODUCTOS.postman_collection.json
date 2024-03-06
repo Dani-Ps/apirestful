@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "c86847dc-3ba5-4ea3-8b1c-fc5379618460",
+		"name": "API_PRODUCTOS",
+		"description": "This is an API for a server proyect.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33409001"
+	},
+	"item": [
+		{
+			"name": "GET-ALL",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2Iuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3MDk2ODAxNzMsImV4cCI6MTcwOTc1MjE3M30.OnrVsNzButzwLjf7Xxb7k4dKkb7Ih-gT7OvIx7c5jHs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/productos/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						""
+					]
+				},
+				"description": "This endpoint allows you to create a new product by making an HTTP POST request to the specified URL. Upon successful execution, the server responds with a status code of 200 and a JSON object containing information about the newly created product. The response includes an array of products with their respective IDs, codes, names, and prices, along with pagination details such as page number, page size, and sorting information.\n\nExample Response:\n\n``` json\n{\n  \"content\": [\n    {\n      \"id\": 0,\n      \"codigo\": \"\",\n      \"nombre\": \"\",\n      \"precio\": 0\n    }\n  ],\n  \"pageable\": {\n    \"pageNumber\": 0,\n    \"pageSize\": 0,\n    \"sort\": {\n      \"sorted\": true,\n      \"unsorted\": true,\n      \"empty\": true\n    },\n    \"offset\": 0,\n    \"unpaged\": true,\n    \"paged\": true\n  },\n  \"last\": true,\n  \"totalPages\": 0,\n  \"totalElements\": 0,\n  \"first\": true,\n  \"numberOfElements\": 0,\n  \"size\": 0,\n  \"number\": 0,\n  \"sort\": {\n    \"sorted\": true,\n    \"unsorted\": true,\n    \"empty\": true\n  },\n  \"empty\": true\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "GET-ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2Iuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3MDk2ODAxNzMsImV4cCI6MTcwOTc1MjE3M30.OnrVsNzButzwLjf7Xxb7k4dKkb7Ih-gT7OvIx7c5jHs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/productos/274",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"274"
+					]
+				},
+				"description": "This endpoint retrieves the details of a specific product with the ID 274.\n\n### Request\n\n`GET /api/v1/productos/274`\n\n### Response\n\n- Status: 200\n- Content-Type: application/json\n    \n\n``` json\n{\n    \"id\": 274,\n    \"codigo\": \"4774377139\",\n    \"nombre\": \"Practical Leather Knife\",\n    \"precio\": 256.42\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "ADD",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2Iuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3MDk2ODAxNzMsImV4cCI6MTcwOTc1MjE3M30.OnrVsNzButzwLjf7Xxb7k4dKkb7Ih-gT7OvIx7c5jHs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"codigo\": \"1234567890\",\r\n  \"nombre\": \"Producto de ejemplo añadir\",\r\n  \"precio\": 10.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/productos/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"add"
+					]
+				},
+				"description": "This API endpoint allows you to add a new product to the system. When making a POST request to the specified URL, you should include the product details in the request body.\n\n### Request Body\n\n- `codigo` (string): The product code.\n- `nombre` (string): The name of the product.\n- `precio` (number): The price of the product.\n    \n\n### Response\n\nUpon a successful execution, the API will return a JSON object with the following fields:\n\n- `id` (number): The unique identifier of the newly added product.\n- `codigo` (string): The product code.\n- `nombre` (string): The name of the product.\n- `precio` (number): The price of the product.\n    \n\nExample:\n\n``` json\n{\n  \"id\": 123,\n  \"codigo\": \"ABC123\",\n  \"nombre\": \"Product Name\",\n  \"precio\": 50.00\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2Iuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3MDk2ODAxNzMsImV4cCI6MTcwOTc1MjE3M30.OnrVsNzButzwLjf7Xxb7k4dKkb7Ih-gT7OvIx7c5jHs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/productos/284",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"284"
+					]
+				},
+				"description": "### Delete Product\n\nThis endpoint sends an HTTP DELETE request to delete a specific product with the ID 284.\n\n#### Response\n\n- Status: 200\n- Content-Type: text/xml\n- Body: null"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2Iuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3MDk2ODAxNzMsImV4cCI6MTcwOTc1MjE3M30.OnrVsNzButzwLjf7Xxb7k4dKkb7Ih-gT7OvIx7c5jHs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"codigo\": \"1234567890\",\r\n  \"nombre\": \"Producto de ejemplo añadir\",\r\n  \"precio\": 10.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/productos/275",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"productos",
+						"275"
+					]
+				},
+				"description": "This API endpoint allows you to update a specific product with the given ID. The HTTP PUT request should be made to [http://localhost:8080/api/v1/productos/275](http://localhost:8080/api/v1/productos/275) with a JSON payload in the request body. The payload should include the fields \"codigo\", \"nombre\", and \"precio\" to update the product details.\n\n### Request Body\n\n- codigo (string): The product code.\n- nombre (string): The name of the product.\n- precio (number): The price of the product.\n    \n\n### Response\n\nUpon a successful update, the API will return a status code of 200 with a JSON response containing the updated product details, including the \"id\", \"codigo\", \"nombre\", and \"precio\" fields.\n\nExample:\n\n``` json\n{\n    \"id\": 0,\n    \"codigo\": \"\",\n    \"nombre\": \"\",\n    \"precio\": 0\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "SIGNIN-ADMIN",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"bob.smith@example.com\",\r\n    \"password\":\"password456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signin"
+					]
+				},
+				"description": "This endpoint allows users to sign in and obtain an authentication token. The HTTP POST request should be made to [http://localhost:8080/api/v1/auth/signin](http://localhost:8080/api/v1/auth/signin) with the raw request body containing the user's email and password.\n\n### Request Body\n\n- email (text, required): The email of the user.\n- password (text, required): The password of the user.\n    \n\n### Response\n\nUpon successful authentication, the server will respond with a status code of 200 and a JSON object containing the authentication token.\n\nExample Response:\n\n``` json\n{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\"\n}\n\n ```"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2Iuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3MDk2ODAxNzMsImV4cCI6MTcwOTc1MjE3M30.OnrVsNzButzwLjf7Xxb7k4dKkb7Ih-gT7OvIx7c5jHs",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url_base_productos",
+			"value": "http://localhost:8080/api/v1/productos",
+			"type": "string"
+		},
+		{
+			"key": "url_base_signin",
+			"value": "http://localhost:8080/api/v1/auth/signin",
+			"type": "string"
+		}
+	]
+}
