@@ -1,4 +1,4 @@
-# API DE PRODUCTOS - PROYECTO FINAL
+# API DE PRODUCTOS - EJERCICIO FINAL
 > ### Profesor - Juan Pablo Domínguez Mayo
 >  > [Pefil de Github](https://github.com/profeInformatica101)
 > ### Alumno - Daniel Perez Serrano 
