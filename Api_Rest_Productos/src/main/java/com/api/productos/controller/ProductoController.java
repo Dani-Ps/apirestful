@@ -2,7 +2,6 @@ package com.api.productos.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.productos.entities.Producto;
-import com.api.productos.service.implementation.ProductoServiceImpl;
+import com.api.productos.service.interfaces.ProductServiceI;
 
 @RestController
 @RequestMapping("/api/v1/productos")
@@ -30,8 +29,11 @@ public class ProductoController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductoController.class);
 
 	@Qualifier("productoService")
-	@Autowired
-	ProductoServiceImpl productoService;
+	private final ProductServiceI productoService;
+
+	public ProductoController(ProductServiceI productoService) {
+		this.productoService = productoService;
+	}
 
 	// METODO POST
 	@PreAuthorize("hasRole('ADMINISTRADOR')")

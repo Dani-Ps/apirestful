@@ -1,6 +1,5 @@
 package com.api.productos.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,8 +14,11 @@ import com.api.productos.service.interfaces.ProductServiceI;
 public class ProductoServiceImpl implements ProductServiceI {
 
 	@Qualifier("productoRepository")
-	@Autowired
-	private ProductoRepository productoRepository;
+	private final ProductoRepository productoRepository;
+
+	public ProductoServiceImpl(ProductoRepository productoRepository) {
+		this.productoRepository = productoRepository;
+	}
 
 	@Override
 	public Producto agregarProducto(Producto producto) {

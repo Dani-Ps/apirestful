@@ -2,7 +2,6 @@ package com.api.productos.config;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,19 +20,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.api.productos.entities.Role;
 import com.api.productos.service.interfaces.UserService;
 
-import lombok.RequiredArgsConstructor;
-
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfiguration {
 
-	@Autowired
-	private JwtAuthenticationFilter jwtAuthenticationFilter;
-
-	@Autowired
-	private UserService userService;
 	private static final String PRODUCTOS_API_PATH = "/api/v1/productos/";
+
+	private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+	private final UserService userService;
+
+	public SecurityConfiguration(JwtAuthenticationFilter jwtAuthenticationFilter, UserService userService) {
+		this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+		this.userService = userService;
+	}
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
