@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "e88e0ba5-c2a2-4f05-ad7e-d71201ad1ddd",
+		"_postman_id": "698f4727-9f91-4cdb-834f-2fb23a9fc6be",
 		"name": "API_PRODUCTOS",
 		"description": "This is an API for a server proyect.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31105801"
+		"_exporter_id": "33409001"
 	},
 	"item": [
 		{
-			"name": "READ-ALL",
+			"name": "READ-PRODUCTS",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -262,6 +262,22 @@
 				"description": "### Auth Signin\n\nThis endpoint is used to sign in and authenticate a user.\n\n#### Request Body\n\n- email (string, required): The email of the user.\n- password (string, required): The password of the user.\n    \n\n#### Response\n\n- Status: 200 OK\n- Content-Type: application/json\n- token (string): A token for authenticating the user."
 			},
 			"response": []
+		},
+		{
+			"name": "READ-RESOURCES",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "READ-USERS",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -269,7 +285,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJib2Iuc21pdGhAZXhhbXBsZS5jb20iLCJpYXQiOjE3MDk2ODAxNzMsImV4cCI6MTcwOTc1MjE3M30.OnrVsNzButzwLjf7Xxb7k4dKkb7Ih-gT7OvIx7c5jHs",
+				"value": "",
 				"type": "string"
 			}
 		]
