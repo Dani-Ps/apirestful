@@ -23,24 +23,6 @@
 >> - **SpringDoc OpenAPI Starter WebMVC UI**: Ofrece soporte para la generación de documentación OpenAPI (anteriormente conocida como Swagger) para la API.
 >> - **Springfox Swagger UI**: Herramienta para generar documentación interactiva de la API utilizando Swagger.
 >
->## Índice de anotaciones.
->>
->> [!NOTE]
->> Para el manual de despliegue.
->>
->> [!TIP]
->> Para consejos claves.
->>
->> [!IMPORTANT]
-> >Para avisos importantes.
->>
->> [!WARNING]
->> Para prestar atención en ese paso concreto.
->>
->> [!CAUTION]
->> Para tener precaución en un punto concreto.
->
->
 >## LINK DE LA DOCUMENTACIÓN:
 >
 >> [POSTMAN DOC.](https://documenter.getpostman.com/view/33409001/2sA2xfYZ2b)
