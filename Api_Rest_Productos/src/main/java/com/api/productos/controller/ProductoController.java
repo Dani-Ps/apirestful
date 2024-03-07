@@ -22,6 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.productos.entities.Producto;
 import com.api.productos.service.interfaces.ProductServiceI;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 @RestController
 @RequestMapping("/api/v1/productos")
 public class ProductoController {
@@ -35,9 +40,12 @@ public class ProductoController {
 		this.productoService = productoService;
 	}
 
-	// METODO POST
 	@PreAuthorize("hasRole('ADMINISTRADOR')")
 	@PostMapping("/")
+	@Operation(summary = "Obtener todos los Productos", description = "Devuelve una lista paginada de productos")
+	@ApiResponse(responseCode = "200", description = "Lista de productos obtenida exitosamente")
+	@ApiResponse(responseCode = "204", description = "No hay productos disponibles")
+	@ApiResponse(responseCode = "400", description = "Parámetros de solicitud incorrectos")
 	public ResponseEntity<Page<Producto>> listarTodosLosProductos(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
 		logger.info("ProductoController :: listarTodosLosProductos");
@@ -45,31 +53,39 @@ public class ProductoController {
 		return new ResponseEntity<>(productoService.listarTodosLosProducto(pageable), HttpStatus.OK);
 	}
 
-	// Leer un producto por ID
 	@GetMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_USER') || hasRole('ROLE_ADMIN')")
+	@Operation(summary = "Obtener un Producto por ID", description = "Devuelve un Producto específico por su ID")
+	@ApiResponse(responseCode = "200", description = "Producto encontrado", content = {
+			@Content(mediaType = "application/json", schema = @Schema(implementation = Producto.class)) })
+	@ApiResponse(responseCode = "404", description = "Producto no encontrado")
 	public Producto getProductpById(@PathVariable Long id) {
 		return productoService.obtenerProductoPorId(id);
 	}
 
-	// CRUD endpoints, accesibles solo por ROLE_ADMIN
-	// Crear un nuevo producto
 	@PostMapping("/add")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(summary = "Crear un nuevo producto", description = "Crea un nuevo producto y lo guarda en la base de datos")
+	@ApiResponse(responseCode = "201", description = "Producto creado con éxito")
+	@ApiResponse(responseCode = "400", description = "Datos proporcionados para el nuevo producto son inválidos")
 	public Producto createProduct(@RequestBody Producto producto) {
 		return productoService.agregarProducto(producto);
 	}
 
-	// Actualizar un producto
 	@PutMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(summary = "Actualizar un producto", description = "Actualiza los detalles de un producto existente")
+	@ApiResponse(responseCode = "200", description = "producto actualizado correctamente")
+	@ApiResponse(responseCode = "404", description = "producto no encontrado para actualizar")
 	public Producto updateProduct(@PathVariable Long id, @RequestBody Producto detalleProducto) {
 		return productoService.actualizarProducto(id, detalleProducto);
 	}
 
-	// Eliminar un producto
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Operation(summary = "Borrar un producto", description = "Elimina un producto existente por su ID")
+	@ApiResponse(responseCode = "204", description = "producto eliminado correctamente")
+	@ApiResponse(responseCode = "404", description = "producto no encontrado para eliminar")
 	public void deleteProduct(@PathVariable Long id) {
 		productoService.eliminarProducto(id);
 	}

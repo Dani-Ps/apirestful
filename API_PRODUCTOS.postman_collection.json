@@ -1,14 +1,14 @@
 {
 	"info": {
-		"_postman_id": "c86847dc-3ba5-4ea3-8b1c-fc5379618460",
+		"_postman_id": "e88e0ba5-c2a2-4f05-ad7e-d71201ad1ddd",
 		"name": "API_PRODUCTOS",
 		"description": "This is an API for a server proyect.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "33409001"
+		"_exporter_id": "31105801"
 	},
 	"item": [
 		{
-			"name": "GET-ALL",
+			"name": "READ-ALL",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -50,7 +50,7 @@
 			"response": []
 		},
 		{
-			"name": "GET-ID",
+			"name": "READ-ID",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -83,7 +83,7 @@
 			"response": []
 		},
 		{
-			"name": "ADD",
+			"name": "CREATE",
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -228,6 +228,38 @@
 					]
 				},
 				"description": "This endpoint allows users to sign in and obtain an authentication token. The HTTP POST request should be made to [http://localhost:8080/api/v1/auth/signin](http://localhost:8080/api/v1/auth/signin) with the raw request body containing the user's email and password.\n\n### Request Body\n\n- email (text, required): The email of the user.\n- password (text, required): The password of the user.\n    \n\n### Response\n\nUpon successful authentication, the server will respond with a status code of 200 and a JSON object containing the authentication token.\n\nExample Response:\n\n``` json\n{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\"\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "SIGNIN-USER",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"alice.johnson@example.com\",\r\n    \"password\":\"password123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"signin"
+					]
+				},
+				"description": "### Auth Signin\n\nThis endpoint is used to sign in and authenticate a user.\n\n#### Request Body\n\n- email (string, required): The email of the user.\n- password (string, required): The password of the user.\n    \n\n#### Response\n\n- Status: 200 OK\n- Content-Type: application/json\n- token (string): A token for authenticating the user."
 			},
 			"response": []
 		}

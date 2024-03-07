@@ -11,6 +11,9 @@ import com.api.productos.dto.request.SigninRequest;
 import com.api.productos.dto.response.user.JwtAuthenticationResponse;
 import com.api.productos.service.interfaces.AuthenticationService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthenticationController {
@@ -22,11 +25,15 @@ public class AuthenticationController {
 	}
 
 	@PostMapping("/signup")
+	@Operation(summary = "Registro de usuario", description = "Registro de un nuevo usuario")
+	@ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente")
 	public ResponseEntity<JwtAuthenticationResponse> signup(@RequestBody SignUpRequest request) {
 		return ResponseEntity.ok(authenticationService.signup(request));
 	}
 
 	@PostMapping("/signin")
+	@Operation(summary = "Inicio de sesión", description = "Inicio de sesión de usuario")
+	@ApiResponse(responseCode = "200", description = "Inicio de sesión exitoso")
 	public ResponseEntity<JwtAuthenticationResponse> signin(@RequestBody SigninRequest request) {
 		return ResponseEntity.ok(authenticationService.signin(request));
 	}
