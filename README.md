@@ -27,4 +27,4 @@
 >
 >> [POSTMAN DOC.](https://documenter.getpostman.com/view/33409001/2sA2xfYZ2b)
 >> 
->> [SWAGGER DOC.](http://localhost:8080/swagger-ui/index.html) - Importante desplegar la API en el puerto 8080
+>> - (http://localhost:8080/swagger-ui/index.html) - SWAGGER DOC
