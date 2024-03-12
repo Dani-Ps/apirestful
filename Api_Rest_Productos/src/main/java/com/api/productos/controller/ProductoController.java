@@ -26,6 +26,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/productos")
@@ -63,12 +64,12 @@ public class ProductoController {
 		return productoService.obtenerProductoPorId(id);
 	}
 
-	@PostMapping("/add")
+	@PostMapping
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Operation(summary = "Crear un nuevo producto", description = "Crea un nuevo producto y lo guarda en la base de datos")
 	@ApiResponse(responseCode = "201", description = "Producto creado con éxito")
 	@ApiResponse(responseCode = "400", description = "Datos proporcionados para el nuevo producto son inválidos")
-	public Producto createProduct(@RequestBody Producto producto) {
+	public Producto createProduct(@Valid @RequestBody Producto producto) {
 		return productoService.agregarProducto(producto);
 	}
 
@@ -77,7 +78,7 @@ public class ProductoController {
 	@Operation(summary = "Actualizar un producto", description = "Actualiza los detalles de un producto existente")
 	@ApiResponse(responseCode = "200", description = "producto actualizado correctamente")
 	@ApiResponse(responseCode = "404", description = "producto no encontrado para actualizar")
-	public Producto updateProduct(@PathVariable Long id, @RequestBody Producto detalleProducto) {
+	public Producto updateProduct(@Valid @PathVariable Long id, @RequestBody Producto detalleProducto) {
 		return productoService.actualizarProducto(id, detalleProducto);
 	}
 
