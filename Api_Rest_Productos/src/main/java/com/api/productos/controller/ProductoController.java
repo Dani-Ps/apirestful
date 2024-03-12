@@ -41,7 +41,7 @@ public class ProductoController {
 	}
 
 	@PreAuthorize("hasRole('ADMINISTRADOR')")
-	@PostMapping("/")
+	@GetMapping
 	@Operation(summary = "Obtener todos los Productos", description = "Devuelve una lista paginada de productos")
 	@ApiResponse(responseCode = "200", description = "Lista de productos obtenida exitosamente")
 	@ApiResponse(responseCode = "204", description = "No hay productos disponibles")
